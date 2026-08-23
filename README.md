@@ -17,3 +17,5 @@ This repository contains my frontend application developed as part of the FlyRan
 npm install
 npm run dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
