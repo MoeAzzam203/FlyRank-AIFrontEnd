@@ -18,3 +18,9 @@ This repository is an AI Frontend internship project built with Next.js App Rout
 - Write tests for important behavior.
 - Do not modify unrelated files when implementing a feature.
 - Do not make architectural changes without explaining the reason first.
+
+## Project-Specific Lessons
+
+- **Respect the requested scope:** Do not add extra settings, fields, controls, or product features that were not requested. Keep implementations focused on the stated requirements.
+- **Implement complete behavior:** Do not add a UI control for functionality unless its described behavior is actually implemented. Avoid controls that appear functional but only change local state without producing the expected user-visible result.
+- **Verify form behavior with tests:** When implementing or modifying a form, add tests for initial state, validation failures, successful submission, and reset behavior where applicable. Run the test suite, lint, and production build after implementation and fix failures before considering the work complete.
