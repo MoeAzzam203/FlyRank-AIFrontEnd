@@ -1,69 +1,84 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export const metadata = {
+  title: "Home",
+  description: "Landing page for the AI Writing Assistant foundation.",
+};
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <section className="mx-auto max-w-5xl">
+      <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <div className="space-y-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+            AI Writing Assistant
           </p>
+          <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
+            Transform rough drafts into polished writing.
+          </h1>
+          <p className="max-w-xl text-lg leading-8 text-[var(--muted-foreground)]">
+            This foundation introduces the experience for a writing assistant that will help users
+            rewrite, refine, and elevate existing text with AI-powered support in the future.
+          </p>
+
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/about"
+              className="rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
+            >
+              Learn more
+            </Link>
+            <Link
+              href="/health"
+              className="rounded-md border border-[var(--border)] bg-white px-5 py-3 text-sm font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)]"
+            >
+              Health check
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="rounded-3xl border border-[var(--border)] bg-white p-5 shadow-sm sm:p-6">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-4">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="inline-block h-3 w-3 rounded-full bg-red-400" aria-hidden="true" />
+              <span className="inline-block h-3 w-3 rounded-full bg-yellow-400" aria-hidden="true" />
+              <span className="inline-block h-3 w-3 rounded-full bg-green-400" aria-hidden="true" />
+            </div>
+
+            <div className="space-y-4">
+              <div className="rounded-xl border border-[var(--border)] bg-white p-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">
+                  Original draft
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--foreground)]">
+                  We need to make this copy clearer and more compelling for new users looking for a
+                  smoother workflow.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-dashed border-[var(--border)] bg-white/70 p-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">
+                  Workflow preview
+                </p>
+                <div className="mt-3 space-y-3">
+                  <div className="h-2.5 w-full rounded-full bg-[var(--border)]" aria-hidden="true" />
+                  <div className="h-2.5 w-5/6 rounded-full bg-[var(--border)]" aria-hidden="true" />
+                  <div className="h-2.5 w-2/3 rounded-full bg-[var(--border)]" aria-hidden="true" />
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-[var(--border)] bg-white p-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted-foreground)]">
+                  Future output
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--muted-foreground)]">
+                  AI-assisted rewrite placeholder for a future editing workflow.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
