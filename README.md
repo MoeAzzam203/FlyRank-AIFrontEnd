@@ -153,3 +153,9 @@ The application uses environment variables for the Gemini API key rather than co
 
 ## Internship Context
 This project was developed as part of the FlyRank AI Frontend internship and focuses on accessible frontend engineering, AI integration, automated testing, and production deployment.
+
+## Known Limitations and Future Improvements
+
+- Gemini availability depends on API quota and provider availability.
+- The application currently focuses on single-text rewriting rather than document-level editing.
+- Future improvements could include rewrite history, additional AI models, richer editing controls, and more extensive end-to-end testing.
