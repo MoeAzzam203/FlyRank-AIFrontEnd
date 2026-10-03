@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 };
 
 const navItems = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/health", label: "Health" },
 ];
