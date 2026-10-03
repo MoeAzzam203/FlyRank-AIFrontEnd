@@ -32,7 +32,7 @@ export default async function HealthPage() {
   return (
     <section className="mx-auto max-w-3xl space-y-6">
       <div className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">
           Health check
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)] sm:text-5xl">
@@ -40,7 +40,7 @@ export default async function HealthPage() {
         </h1>
       </div>
 
-      <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm sm:p-8">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm sm:p-8">
         {errorMessage ? (
           <div className="rounded-xl border border-[var(--danger)] bg-[var(--danger-soft)] p-4 text-[var(--danger)]">
             <p className="font-medium">Unable to fetch health data.</p>

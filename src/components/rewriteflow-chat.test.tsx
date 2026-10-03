@@ -48,4 +48,54 @@ describe("RewriteFlowChat", () => {
     expect(input).toHaveValue("");
     expect(generateButton).toBeDisabled();
   });
+
+  it("defaults to Improve and updates the selected mode", async () => {
+    const user = userEvent.setup();
+    render(<RewriteFlowChat />);
+
+    const mode = screen.getByRole("combobox", { name: "Mode" });
+    expect(mode).toHaveValue("improve");
+
+    await user.selectOptions(mode, "professional");
+
+    expect(mode).toHaveValue("professional");
+  });
+
+  it("shows and hides the custom instruction field without changing the draft", async () => {
+    const user = userEvent.setup();
+    render(<RewriteFlowChat />);
+
+    const draft = screen.getByRole("textbox", { name: "Text to rewrite" });
+    await user.type(draft, "Keep this draft.");
+    await user.selectOptions(screen.getByRole("combobox", { name: "Mode" }), "custom");
+
+    const instruction = screen.getByRole("textbox", { name: "Custom instruction" });
+    expect(instruction).toBeVisible();
+    expect(draft).toHaveValue("Keep this draft.");
+
+    await user.type(instruction, "Make it sound confident but casual.");
+    await user.selectOptions(screen.getByRole("combobox", { name: "Mode" }), "friendly");
+
+    expect(screen.queryByRole("textbox", { name: "Custom instruction" })).not.toBeInTheDocument();
+    expect(draft).toHaveValue("Keep this draft.");
+
+    await user.selectOptions(screen.getByRole("combobox", { name: "Mode" }), "custom");
+    expect(screen.getByRole("textbox", { name: "Custom instruction" })).toHaveValue(
+      "Make it sound confident but casual.",
+    );
+  });
+
+  it("prevents Generate when Custom has no instruction", async () => {
+    const user = userEvent.setup();
+    render(<RewriteFlowChat />);
+
+    await user.type(screen.getByRole("textbox", { name: "Text to rewrite" }), "A draft.");
+    await user.selectOptions(screen.getByRole("combobox", { name: "Mode" }), "custom");
+
+    expect(screen.getByRole("textbox", { name: "Custom instruction" })).toBeRequired();
+    expect(screen.getByRole("button", { name: "Generate" })).toBeDisabled();
+
+    await user.click(screen.getByRole("button", { name: "Generate" }));
+    expect(sendMessage).not.toHaveBeenCalled();
+  });
 });

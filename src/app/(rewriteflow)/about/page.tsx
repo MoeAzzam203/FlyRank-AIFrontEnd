@@ -7,7 +7,7 @@ export default function AboutPage() {
   return (
     <section className="mx-auto max-w-3xl space-y-8">
       <div className="space-y-4">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">
           About the product
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)] sm:text-5xl">
@@ -15,7 +15,7 @@ export default function AboutPage() {
         </h1>
       </div>
 
-      <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm sm:p-8">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm sm:p-8">
         <p className="text-lg leading-8 text-[var(--muted-foreground)]">
           This application is designed to become an AI Writing Assistant for people who want to
           transform existing writing into clearer, stronger, and more polished drafts. The

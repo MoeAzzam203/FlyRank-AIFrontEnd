@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <section className="mx-auto max-w-5xl space-y-8">
       <div className="max-w-3xl space-y-4">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
           RewriteFlow
         </p>
         <h1 className="text-4xl font-semibold tracking-tight text-[var(--foreground)] sm:text-5xl">
