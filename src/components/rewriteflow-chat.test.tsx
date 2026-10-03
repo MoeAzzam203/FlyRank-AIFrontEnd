@@ -44,7 +44,10 @@ describe("RewriteFlowChat", () => {
 
     await user.click(generateButton);
 
-    expect(sendMessage).toHaveBeenCalledWith({ text: "Please improve this draft." });
+    expect(sendMessage).toHaveBeenCalledWith(
+      { text: "Please improve this draft." },
+      { body: { mode: "improve", customInstruction: "" } },
+    );
     expect(input).toHaveValue("");
     expect(generateButton).toBeDisabled();
   });
@@ -97,5 +100,22 @@ describe("RewriteFlowChat", () => {
 
     await user.click(screen.getByRole("button", { name: "Generate" }));
     expect(sendMessage).not.toHaveBeenCalled();
+  });
+
+  it("sends custom instructions separately from the user's text", async () => {
+    const user = userEvent.setup();
+    render(<RewriteFlowChat />);
+
+    const draft = "Please review this update.";
+    const instruction = "Make it sound confident but casual.";
+    await user.type(screen.getByRole("textbox", { name: "Text to rewrite" }), draft);
+    await user.selectOptions(screen.getByRole("combobox", { name: "Mode" }), "custom");
+    await user.type(screen.getByRole("textbox", { name: "Custom instruction" }), instruction);
+    await user.click(screen.getByRole("button", { name: "Generate" }));
+
+    expect(sendMessage).toHaveBeenCalledWith(
+      { text: draft },
+      { body: { mode: "custom", customInstruction: instruction } },
+    );
   });
 });

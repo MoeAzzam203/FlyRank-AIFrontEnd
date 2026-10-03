@@ -4,9 +4,12 @@ import {
   streamText,
   type UIMessage,
 } from 'ai';
-import { getRewriteFlowModel, rewriteFlowSystemPrompt } from '@/lib/ai/rewriteflow';
+import { getRewriteFlowSystemPrompt, getRewriteFlowModel } from '@/lib/ai/rewriteflow';
+import { isRewriteMode } from '@/lib/ai/rewriteflow-modes';
 
-function isMessagesPayload(value: unknown): value is { messages: unknown[] } {
+function isMessagesPayload(
+  value: unknown,
+): value is { messages: unknown[]; mode: unknown; customInstruction?: unknown } {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -28,6 +31,27 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ error: 'Request body must contain a messages array.' }, { status: 400 });
   }
 
+  const mode = payload.mode;
+  if (!isRewriteMode(mode)) {
+    return Response.json({ error: 'Request body must contain a valid rewrite mode.' }, { status: 400 });
+  }
+
+  let customInstruction: string | undefined;
+  if (
+    payload.customInstruction !== undefined &&
+    typeof payload.customInstruction !== 'string'
+  ) {
+    return Response.json({ error: 'Custom instruction must be a string.' }, { status: 400 });
+  }
+
+  if (typeof payload.customInstruction === 'string') {
+    customInstruction = payload.customInstruction;
+  }
+
+  if (mode === 'custom' && !customInstruction?.trim()) {
+    return Response.json({ error: 'Custom mode requires a non-empty custom instruction.' }, { status: 400 });
+  }
+
   const validation = await safeValidateUIMessages({
     messages: payload.messages as UIMessage[],
   });
@@ -46,7 +70,10 @@ export async function POST(request: Request): Promise<Response> {
 
   const result = streamText({
     model,
-    system: rewriteFlowSystemPrompt,
+    system: getRewriteFlowSystemPrompt(
+      mode,
+      mode === 'custom' ? customInstruction : undefined,
+    ),
     messages: await convertToModelMessages(validation.data),
     abortSignal: request.signal,
   });

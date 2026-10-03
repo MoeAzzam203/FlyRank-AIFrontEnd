@@ -11,16 +11,9 @@ import {
 } from "lucide-react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import type { RewriteMode } from "@/lib/ai/rewriteflow-modes";
 
 type CopyFeedback = "idle" | "copied" | "error";
-type RewriteMode =
-  | "improve"
-  | "professional"
-  | "friendly"
-  | "concise"
-  | "simplify"
-  | "fix-grammar"
-  | "custom";
 
 function getMessageText(message: UIMessage): string {
   return message.parts.reduce(
@@ -93,7 +86,10 @@ export default function RewriteFlowChat() {
     isPinnedToBottomRef.current = true;
     setShowJumpToLatest(false);
     setInput("");
-    sendMessage({ text });
+    sendMessage(
+      { text },
+      { body: { mode, customInstruction } },
+    );
   }
 
   async function copyLatestResponse() {
