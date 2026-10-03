@@ -159,3 +159,7 @@ This project was developed as part of the FlyRank AI Frontend internship and foc
 - Gemini availability depends on API quota and provider availability.
 - The application currently focuses on single-text rewriting rather than document-level editing.
 - Future improvements could include rewrite history, additional AI models, richer editing controls, and more extensive end-to-end testing.
+
+## AI-Assisted Development
+
+This project was developed using AI-assisted coding workflows. AI agents were used to help implement components, application logic, testing, and documentation under continuous human review. Development decisions, requirements, validation, debugging, and final acceptance remained developer-directed. Generated changes were reviewed and tested before being committed.
